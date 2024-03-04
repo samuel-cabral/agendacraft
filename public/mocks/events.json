@@ -1,0 +1,32 @@
+{
+  "events": [
+    {
+      "id":1,
+      "name":"Organize the office",
+      "description":"Organize the office and make sure everything is in its place",
+      "date":"2022-08-29",
+      "image":"/assets/images/office.jpg"
+    },
+    {
+      "id":2,
+      "name":"Meeting with the boss",
+      "description":"Meeting with the boss to discuss the future of the company",
+      "date":"2022-08-30",
+      "image":"/assets/images/meeting.jpg"
+    },
+    {
+      "id":3,
+      "name":"Dinner with friends",
+      "description":"Dinner with friends at the new restaurant in town",
+      "date":"2022-08-31",
+      "image":"/assets/images/dinner.jpg"
+    },
+    {
+      "id":4,
+      "name":"Weekend getaway",
+      "description":"Weekend getaway to the beach",
+      "date":"2022-09-01",
+      "image":"/assets/images/beach.jpg"
+    }
+  ]
+}
