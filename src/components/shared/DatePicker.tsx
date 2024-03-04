@@ -1,5 +1,6 @@
 'use client'
 
+import { Label } from '@radix-ui/react-label'
 import { format } from 'date-fns'
 import { Calendar as CalendarIcon } from 'lucide-react'
 import { FieldError, useFormContext } from 'react-hook-form'
@@ -13,13 +14,7 @@ import {
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '../ui/form'
+import { FormControl, FormField, FormItem, FormMessage } from '../ui/form'
 
 interface DatePickerProps {
   name: string
@@ -36,8 +31,8 @@ export function DatePicker({ name, label, error, className }: DatePickerProps) {
       name={name}
       render={({ field }) => {
         return (
-          <FormItem className="flex flex-col">
-            <FormLabel>{label}</FormLabel>
+          <FormItem className="flex flex-col gap-1">
+            <Label className="text-sm">{label}</Label>
             <Popover>
               <PopoverTrigger asChild>
                 <FormControl>
@@ -46,14 +41,14 @@ export function DatePicker({ name, label, error, className }: DatePickerProps) {
                     onClick={field.onChange}
                     className={cn(
                       'w-[240px] pl-3 text-left font-normal',
-                      !field.value && 'text-muted-foreground',
+                      error?.message && 'border-red-500',
                       className,
                     )}
                   >
                     {field.value ? (
                       format(field.value, 'PPP')
                     ) : (
-                      <span>Pick a date</span>
+                      <span>Pick a valid date</span>
                     )}
                     <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                   </Button>
@@ -74,7 +69,7 @@ export function DatePicker({ name, label, error, className }: DatePickerProps) {
                 />
               </PopoverContent>
             </Popover>
-            <FormMessage />
+            <FormMessage className="text-red-500" />
           </FormItem>
         )
       }}

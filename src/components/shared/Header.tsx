@@ -9,8 +9,9 @@ export function Header() {
       <div className="container flex items-center justify-between">
         <Logo />
 
-        <nav className="md:flex-between hidden w-full max-w-xs md:block">
+        <nav className="hidden w-full md:flex md:justify-between md:gap-5">
           <NavItems />
+          <ModeToggle />
         </nav>
 
         <div className="flex w-32 items-center justify-end gap-3 md:hidden">

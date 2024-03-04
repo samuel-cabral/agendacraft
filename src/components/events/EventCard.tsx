@@ -1,48 +1,64 @@
+import { Eye, Pencil, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import NextLink from 'next/link'
 
 import { Button } from '@/components/ui/button'
-import { api } from '@/lib/axios'
-import { IEvent } from '@/store'
+import { IEvent, useEventsStore } from '@/store'
 
 export type EventCardProps = {
   event: IEvent
 }
 
 export function EventCard({ event }: EventCardProps) {
-  async function handleDelete(id: number) {
-    try {
-      await api.delete(`events/${id}`)
-      alert('Event deleted successfully')
-    } catch (error) {
-      console.error(error)
-      alert('An error occurred while deleting the event')
-    }
-  }
+  const { deleteEvent } = useEventsStore()
 
   return (
-    <div className="flex flex-col gap-2 rounded-lg bg-muted p-4 shadow-md">
+    <div className="flex flex-col gap-2 rounded-lg bg-muted shadow-md">
       <Image
         src={event.image}
         alt={event.name}
         width={1000}
         height={1000}
-        className="rounded-lg"
+        className="rounded-t-lg object-cover"
       />
 
-      <h2 className="mb-2 text-xl font-bold text-foreground">{event.name}</h2>
-      <p className="mb-2 text-muted-foreground">{event.date}</p>
-      <p className="mb-4 font-light leading-tight text-foreground">
-        {event.description}
-      </p>
-      <div className="flex items-center justify-between">
-        <div>
-          <Button className="mr-2">
-            <NextLink href={`/events/${event.id}/edit`}>Edit</NextLink>
-          </Button>
-          <Button onClick={() => handleDelete(event.id)}>Delete</Button>
+      <div id="card-content" className="p-4">
+        <h2 className="mb-2 text-xl font-bold text-foreground">{event.name}</h2>
+        <p className="mb-2 text-muted-foreground">{event.date}</p>
+        <p className="mb-4 font-light leading-tight text-foreground">
+          {event.description}
+        </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <NextLink
+              href={`/events/${event.id}/edit`}
+              className="hover:text-muted"
+            >
+              <Button
+                className="mr-2 gap-2 text-foreground hover:text-muted-foreground"
+                variant={'outline'}
+              >
+                Edit
+                <Pencil size={14} />
+              </Button>
+            </NextLink>
+
+            <Button
+              onClick={() => deleteEvent(event.id)}
+              variant={'destructive'}
+              className="gap-2"
+            >
+              Delete
+              <Trash2 size={14} />
+            </Button>
+          </div>
+          <NextLink href={`/events/${event.id}`}>
+            <span className="inline-flex gap-2 text-sm text-muted-foreground">
+              <Eye size={20} />
+              View details
+            </span>
+          </NextLink>
         </div>
-        <NextLink href={`/events/${event.id}`}>View details</NextLink>
       </div>
     </div>
   )

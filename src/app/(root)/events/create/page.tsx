@@ -1,23 +1,10 @@
 import { EventForm } from '@/components/shared/EventForm'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 export default function CreateEvent() {
   return (
-    <main className="mx-auto max-w-lg">
-      <section className="mb-4 mt-5 flex items-center justify-center px-24 py-0">
-        <div className="flex flex-col items-center justify-center">
-          <Avatar className="h-20 w-20">
-            <AvatarImage src="https://github.com/samuel-cabral.png" />
-            <AvatarFallback>SC</AvatarFallback>
-          </Avatar>
-
-          <h2 className="mt-2 text-xl font-bold leading-normal">
-            Samuel Cabral
-          </h2>
-          <p className="text-x-foreground text-sm opacity-50">
-            Front-end Developer
-          </p>
-        </div>
+    <div className="mx-auto flex w-1/2 flex-1 flex-col">
+      <section className="mb-4 mt-5 flex items-center">
+        <h1 className="text-3xl font-bold">Create Event</h1>
       </section>
 
       <section
@@ -26,6 +13,6 @@ export default function CreateEvent() {
       >
         <EventForm />
       </section>
-    </main>
+    </div>
   )
 }
