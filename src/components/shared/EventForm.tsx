@@ -1,6 +1,6 @@
 'use client'
 
-import { startOfDay } from 'date-fns'
+import { startOfDecade } from 'date-fns'
 import { useFormContext } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -13,7 +13,7 @@ import { DatePicker } from './DatePicker'
 
 export const eventFormSchema = z.object({
   eventName: z.string().min(1, 'Event name is required'),
-  date: z.coerce.date().min(startOfDay(new Date()), 'Date is required'),
+  date: z.coerce.date().min(startOfDecade(new Date()), 'Date is required'),
   description: z
     .string()
     .min(1, 'Description must be a minimum of 1 character'),

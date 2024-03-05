@@ -17,7 +17,7 @@ type EventsState = {
   fetchEvents: () => Promise<void>
   getEvent: (id: string) => IEvent | undefined
   addEvent: (payload: Omit<IEvent, 'id'>) => Promise<void>
-  editEvent: (event: IEvent) => void
+  editEvent: (payload: IEvent) => Promise<void>
   deleteEvent: (id: string) => void
 }
 
@@ -46,10 +46,18 @@ export const useEventsStore = create<EventsState>((set, get) => ({
     }
   },
   getEvent: (id) => {
-    return get().events.find((event) => event.id === id)
+    const event = get().events.find((event) => event.id === id)
+
+    if (!event) {
+      console.error('Event not found')
+    }
+
+    return event
   },
 
   addEvent: async (payload) => {
+    set({ isLoading: true })
+
     const response = await api.post<IEvent>('events', payload)
 
     if (!response.data) {
@@ -58,10 +66,20 @@ export const useEventsStore = create<EventsState>((set, get) => ({
 
     const event = response.data
 
-    set((state) => ({ events: [...state.events, event] }))
+    set((state) => ({ isLoading: false, events: [...state.events, event] }))
   },
-  editEvent: (event) => {
+  editEvent: async (payload) => {
+    set({ isLoading: true })
+
+    const response = await api.put<IEvent>(`events/${payload.id}`, payload)
+    const event = response.data
+
+    if (!response.data) {
+      throw new Error('Failed to update event')
+    }
+
     set((state) => ({
+      isLoading: false,
       events: state.events.map((e) => (e.id === event.id ? event : e)),
     }))
   },

@@ -1,28 +1,28 @@
 {
   "events": [
     {
-      "id": 1,
-      "name": "Organize the office",
+      "id": "1",
+      "name": "Organize the office (First event created)",
+      "date": "2024-03-05T03:00:00.000Z",
       "description": "Organize the office and make sure everything is in its place",
-      "date": "2024-03-05T01:47:09.216Z",
       "image": "/assets/images/office.jpg"
     },
     {
-      "id": 2,
-      "name": "Meeting with the boss",
+      "id": "2",
+      "name": "Meeting with the boss (Second event - updated)",
+      "date": "2024-03-03T03:00:00.000Z",
       "description": "Meeting with the boss to discuss the future of the company",
-      "date": "2024-03-04T01:48:09.216Z",
       "image": "/assets/images/meeting.jpg"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Dinner with friends",
       "description": "Dinner with friends at the new restaurant in town",
       "date": "2024-08-31T10:00:00.000Z",
       "image": "/assets/images/dinner.jpg"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Weekend getaway",
       "description": "Weekend getaway to the beach",
       "date": "2024-10-01T03:00:00.000Z",

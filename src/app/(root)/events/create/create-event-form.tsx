@@ -40,6 +40,7 @@ export function CreateEventForm() {
 
     toast.success('Event has been created', {
       description: format(date, 'MMMM dd, yyyy'),
+      closeButton: true,
     })
   }
 
