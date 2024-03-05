@@ -29,13 +29,14 @@ export const useEventsStore = create<EventsState>((set, get) => ({
     set({ isLoading: true })
 
     try {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
       const response = await api.get('events')
 
       if (!response.data) {
         throw new Error('Failed to fetch events')
       }
 
-      const events = await response.data
+      const events = response.data
 
       set({ events, isLoading: false })
     } catch (error) {

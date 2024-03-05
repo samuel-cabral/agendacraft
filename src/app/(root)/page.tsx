@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -27,7 +29,7 @@ export default function Home() {
             alt="Hero"
             width={1000}
             height={1000}
-            className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]"
+            className="hidden max-h-[70vh] object-contain object-center md:block 2xl:max-h-[50vh]"
           />
         </div>
       </section>

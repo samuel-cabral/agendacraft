@@ -20,7 +20,7 @@ interface EditEventProps {
 export default async function EditEvent({ params }: EditEventProps) {
   const event = await getEvent(params.id)
 
-  await new Promise((resolve) => setTimeout(resolve, 1000)) // only to render loading component for a while
+  await new Promise((resolve) => setTimeout(resolve, 1000))
 
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col justify-center">

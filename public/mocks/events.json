@@ -10,22 +10,22 @@
     {
       "id": "2",
       "name": "Meeting with the boss (Second event - updated)",
-      "date": "2024-03-03T03:00:00.000Z",
+      "date": "2024-03-06T03:00:00.000Z",
       "description": "Meeting with the boss to discuss the future of the company",
       "image": "/assets/images/meeting.jpg"
     },
     {
       "id": "3",
       "name": "Dinner with friends",
+      "date": "2024-03-07T03:00:00.000Z",
       "description": "Dinner with friends at the new restaurant in town",
-      "date": "2024-08-31T10:00:00.000Z",
       "image": "/assets/images/dinner.jpg"
     },
     {
       "id": "4",
-      "name": "Weekend getaway",
-      "description": "Weekend getaway to the beach",
-      "date": "2024-10-01T03:00:00.000Z",
+      "name": "International Women's Day",
+      "date": "2024-03-08T03:00:00.000Z",
+      "description": "International Women's Day is a global holiday celebrated annually on March 8 as a focal point in the women's rights movement. IWD gives focus to issues such as gender equality, reproductive rights, and violence and abuse against women.\n\nReference: https://en.wikipedia.org/wiki/International_Women's_Day",
       "image": "/assets/images/beach.jpg"
     },
     {

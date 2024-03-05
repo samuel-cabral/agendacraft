@@ -22,7 +22,7 @@ export function EventCard({ event }: EventCardProps) {
         alt={event.name}
         width={1000}
         height={1000}
-        className="rounded-t-lg object-cover"
+        className="hidden rounded-t-lg object-cover md:block"
       />
 
       <div id="card-content" className="p-4">
@@ -38,10 +38,11 @@ export function EventCard({ event }: EventCardProps) {
               className="hover:text-muted"
             >
               <Button
-                className="mr-2 gap-2 text-foreground hover:text-muted-foreground"
+                className="mr-2 gap-2"
                 variant={'outline'}
+                aria-label="open edit event page"
               >
-                Edit
+                <span className="hidden md:inline-block">Edit</span>
                 <Pencil size={14} />
               </Button>
             </NextLink>
@@ -50,16 +51,22 @@ export function EventCard({ event }: EventCardProps) {
               onClick={() => deleteEvent(event.id)}
               variant={'destructive'}
               className="gap-2"
+              aria-label="Delete event"
             >
-              Delete
+              <span className="hidden md:inline-block">Delete</span>
               <Trash2 size={14} />
             </Button>
           </div>
           <NextLink href={`/events/${event.id}`}>
-            <span className="inline-flex gap-2 text-sm text-muted-foreground">
-              <Eye size={20} />
-              View details
-            </span>
+            <Button variant="ghost" aria-label="View event details">
+              <p className="inline-flex gap-2 text-sm text-muted-foreground">
+                <span className="hidden md:inline-block">View details</span>
+                <Eye
+                  size={20}
+                  className="text-muted-foreground transition duration-150 ease-in-out hover:text-foreground"
+                />
+              </p>
+            </Button>
           </NextLink>
         </div>
       </div>
