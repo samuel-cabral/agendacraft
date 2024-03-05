@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { Eye, Pencil, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import NextLink from 'next/link'
@@ -12,6 +13,8 @@ export type EventCardProps = {
 export function EventCard({ event }: EventCardProps) {
   const { deleteEvent } = useEventsStore()
 
+  const formattedEventDate = format(new Date(event.date), 'MMMM dd, yyyy')
+
   return (
     <div className="flex flex-col gap-2 rounded-lg bg-muted shadow-md">
       <Image
@@ -24,7 +27,7 @@ export function EventCard({ event }: EventCardProps) {
 
       <div id="card-content" className="p-4">
         <h2 className="mb-2 text-xl font-bold text-foreground">{event.name}</h2>
-        <p className="mb-2 text-muted-foreground">{event.date}</p>
+        <p className="mb-2 text-muted-foreground">{formattedEventDate}</p>
         <p className="mb-4 font-light leading-tight text-foreground">
           {event.description}
         </p>

@@ -7,7 +7,7 @@ import { useEventsStore } from '@/store'
 import { EventCard } from './EventCard'
 
 export function EventsList() {
-  const { events, fetchEvents, isLoading } = useEventsStore()
+  const { events, fetchEvents } = useEventsStore()
 
   useEffect(() => {
     fetchEvents()
