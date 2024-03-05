@@ -4,7 +4,7 @@ import Image from 'next/image'
 import NextLink from 'next/link'
 
 import { Button } from '@/components/ui/button'
-import { IEvent, useEventsStore } from '@/store'
+import { IEvent } from '@/store'
 
 import { EventDeletionDialog } from './EventDeletionDialog'
 
@@ -13,8 +13,6 @@ export type EventCardProps = {
 }
 
 export function EventCard({ event }: EventCardProps) {
-  const { deleteEvent } = useEventsStore()
-
   const formattedEventDate = format(new Date(event.date), 'MMMM dd, yyyy')
 
   return (

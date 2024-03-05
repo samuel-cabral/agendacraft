@@ -36,7 +36,7 @@ export default function Home() {
 
       <section id="events" className="mb-5 flex flex-col">
         <h2 className="mb-3 text-xl font-bold md:mb-6 md:text-3xl">
-          Upcoming events
+          Your events
         </h2>
 
         <div className="base:grid-cols-1 grid gap-5 sm:grid-cols-1 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
