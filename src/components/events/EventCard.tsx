@@ -1,10 +1,12 @@
 import { format } from 'date-fns'
-import { Eye, Pencil, Trash2 } from 'lucide-react'
+import { Eye, Pencil } from 'lucide-react'
 import Image from 'next/image'
 import NextLink from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import { IEvent, useEventsStore } from '@/store'
+
+import { EventDeletionDialog } from './EventDeletionDialog'
 
 export type EventCardProps = {
   event: IEvent
@@ -47,15 +49,7 @@ export function EventCard({ event }: EventCardProps) {
               </Button>
             </NextLink>
 
-            <Button
-              onClick={() => deleteEvent(event.id)}
-              variant={'destructive'}
-              className="gap-2"
-              aria-label="Delete event"
-            >
-              <span className="hidden md:inline-block">Delete</span>
-              <Trash2 size={14} />
-            </Button>
+            <EventDeletionDialog event={event} />
           </div>
           <NextLink href={`/events/${event.id}`}>
             <Button variant="ghost" aria-label="View event details">

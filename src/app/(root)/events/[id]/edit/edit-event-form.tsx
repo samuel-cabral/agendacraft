@@ -18,7 +18,7 @@ interface EditEventFormProps {
 }
 
 export function EditEventForm({ event }: EditEventFormProps) {
-  const { editEvent, isLoading } = useEventsStore()
+  const { updateEvent, isLoading } = useEventsStore()
 
   const editEventForm = useForm<EventFormData>({
     resolver: zodResolver(eventFormSchema),
@@ -46,7 +46,7 @@ export function EditEventForm({ event }: EditEventFormProps) {
       image: event.image,
     }
 
-    await editEvent(payload)
+    await updateEvent(payload)
 
     toast.success('Event has been updated', {
       description: format(date, 'MMMM dd, yyyy'),
@@ -64,7 +64,7 @@ export function EditEventForm({ event }: EditEventFormProps) {
       </FormProvider>
 
       <Button type="submit" disabled={isLoading}>
-        Update Event
+        {isLoading ? 'Updating...' : 'Update Event'}
       </Button>
     </form>
   )

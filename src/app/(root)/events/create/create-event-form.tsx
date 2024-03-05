@@ -53,7 +53,7 @@ export function CreateEventForm() {
         <EventForm />
       </FormProvider>
       <Button type="submit" disabled={isLoading}>
-        Add Event
+        {isLoading ? 'Creating...' : 'Create event'}
       </Button>
     </form>
   )
