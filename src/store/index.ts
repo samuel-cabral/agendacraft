@@ -12,25 +12,24 @@ export interface IEvent {
 
 type EventsState = {
   events: IEvent[]
-  loading: boolean
+  isLoading: boolean
   error: string | null
-  fetchEvents: () => void
+  fetchEvents: () => Promise<void>
+  getEvent: (id: number) => IEvent | undefined
   addEvent: (event: IEvent) => void
   editEvent: (event: IEvent) => void
   deleteEvent: (id: number) => void
 }
 
-export const useEventsStore = create<EventsState>((set) => ({
+export const useEventsStore = create<EventsState>((set, get) => ({
   events: [],
-  loading: false,
+  isLoading: false,
   error: null,
   fetchEvents: async () => {
-    set({ loading: true })
+    set({ isLoading: true })
 
     try {
       const response = await api.get('events')
-
-      console.log(response.data)
 
       if (!response.data) {
         throw new Error('Failed to fetch events')
@@ -38,12 +37,16 @@ export const useEventsStore = create<EventsState>((set) => ({
 
       const events = await response.data
 
-      set({ events, loading: false })
+      set({ events, isLoading: false })
     } catch (error) {
       console.error('error on fetch events', error)
-      if (error instanceof Error) set({ error: error.message, loading: false })
-      else set({ error: 'An error occurred', loading: false })
+      if (error instanceof Error)
+        set({ error: error.message, isLoading: false })
+      else set({ error: 'An error occurred', isLoading: false })
     }
+  },
+  getEvent: (id) => {
+    return get().events.find((event) => event.id === id)
   },
   addEvent: (event) => {
     set((state) => ({ events: [...state.events, event] }))

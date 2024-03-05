@@ -1,12 +1,19 @@
 'use client'
 
-import { Label } from '@radix-ui/react-label'
-import { format } from 'date-fns'
-import { Calendar as CalendarIcon } from 'lucide-react'
+import { format, startOfDay } from 'date-fns'
+import { CalendarIcon } from 'lucide-react'
+import { InputHTMLAttributes } from 'react'
 import { FieldError, useFormContext } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
 import {
   Popover,
   PopoverContent,
@@ -14,65 +21,66 @@ import {
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 
-import { FormControl, FormField, FormItem, FormMessage } from '../ui/form'
-
-interface DatePickerProps {
+interface DatePicketProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
-  label: string
-  error: FieldError | undefined
+  label?: string
   className?: string
+  error?: FieldError
 }
 
-export function DatePicker({ name, label, error, className }: DatePickerProps) {
-  const form = useFormContext()
+export function DatePicker({
+  label,
+  name,
+  className,
+  placeholder,
+  error,
+}: DatePicketProps) {
+  const { control } = useFormContext()
   return (
     <FormField
-      control={form.control}
+      control={control}
       name={name}
-      render={({ field }) => {
-        return (
-          <FormItem className="flex flex-col gap-1">
-            <Label className="text-sm">{label}</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <FormControl>
-                  <Button
-                    variant={'outline'}
-                    onClick={field.onChange}
-                    className={cn(
-                      'w-[240px] pl-3 text-left font-normal',
-                      error?.message && 'border-red-500',
-                      className,
-                    )}
-                  >
-                    {field.value ? (
-                      format(field.value, 'PPP')
-                    ) : (
-                      <span>Pick a valid date</span>
-                    )}
-                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                  </Button>
-                </FormControl>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={field.value}
-                  onSelect={field.onChange}
-                  disabled={(date) => date <= new Date()}
-                  initialFocus
+      render={({ field }) => (
+        <FormItem className="flex flex-col">
+          {label && (
+            <FormLabel className="text-xs md:text-sm">{label}</FormLabel>
+          )}
+          <Popover>
+            <PopoverTrigger asChild>
+              <FormControl>
+                <Button
+                  variant={'outline'}
                   className={cn(
-                    'w-auto rounded-lg p-4',
-                    error && 'border-red-500',
+                    'w-[240px] pl-3 text-left font-normal',
+                    !field.value && 'text-muted-foreground',
                     className,
                   )}
-                />
-              </PopoverContent>
-            </Popover>
-            <FormMessage className="text-red-500" />
-          </FormItem>
-        )
-      }}
+                >
+                  {field.value ? (
+                    format(field.value, 'PPP')
+                  ) : (
+                    <span>{placeholder}</span>
+                  )}
+                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                </Button>
+              </FormControl>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="center">
+              <Calendar
+                mode="single"
+                selected={field.value}
+                onSelect={field.onChange}
+                disabled={(date) => date < startOfDay(new Date())}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
+
+          {error && (
+            <FormMessage className="text-red-500">{error.message}</FormMessage>
+          )}
+        </FormItem>
+      )}
     />
   )
 }

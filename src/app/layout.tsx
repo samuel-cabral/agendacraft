@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { ThemeProvider } from '@/components/theme-provider'
-import { Toaster } from '@/components/ui/toaster'
+import { Toaster } from '@/components/ui/sonner'
 import { Providers } from '@/providers'
 
 const inter = Inter({
@@ -33,7 +33,7 @@ export default function RootLayout({
         >
           <Providers>{children}</Providers>
         </ThemeProvider>
-        <Toaster />
+        <Toaster richColors position="top-right" expand={false} />
       </body>
     </html>
   )
