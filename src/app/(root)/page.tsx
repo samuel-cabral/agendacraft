@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -27,14 +29,14 @@ export default function Home() {
             alt="Hero"
             width={1000}
             height={1000}
-            className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]"
+            className="hidden max-h-[70vh] object-contain object-center md:block 2xl:max-h-[50vh]"
           />
         </div>
       </section>
 
       <section id="events" className="mb-5 flex flex-col">
         <h2 className="mb-3 text-xl font-bold md:mb-6 md:text-3xl">
-          Upcoming events
+          Your events
         </h2>
 
         <div className="base:grid-cols-1 grid gap-5 sm:grid-cols-1 md:grid-cols-2 md:gap-8 lg:grid-cols-3">

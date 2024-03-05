@@ -17,8 +17,8 @@ type EventsState = {
   fetchEvents: () => Promise<void>
   getEvent: (id: string) => IEvent | undefined
   addEvent: (payload: Omit<IEvent, 'id'>) => Promise<void>
-  editEvent: (payload: IEvent) => Promise<void>
-  deleteEvent: (id: string) => void
+  updateEvent: (payload: IEvent) => Promise<void>
+  deleteEvent: (id: string) => Promise<void>
 }
 
 export const useEventsStore = create<EventsState>((set, get) => ({
@@ -29,13 +29,14 @@ export const useEventsStore = create<EventsState>((set, get) => ({
     set({ isLoading: true })
 
     try {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
       const response = await api.get('events')
 
       if (!response.data) {
         throw new Error('Failed to fetch events')
       }
 
-      const events = await response.data
+      const events = response.data
 
       set({ events, isLoading: false })
     } catch (error) {
@@ -58,6 +59,7 @@ export const useEventsStore = create<EventsState>((set, get) => ({
   addEvent: async (payload) => {
     set({ isLoading: true })
 
+    await new Promise((resolve) => setTimeout(resolve, 1000)) // simulate loading
     const response = await api.post<IEvent>('events', payload)
 
     if (!response.data) {
@@ -68,9 +70,10 @@ export const useEventsStore = create<EventsState>((set, get) => ({
 
     set((state) => ({ isLoading: false, events: [...state.events, event] }))
   },
-  editEvent: async (payload) => {
+  updateEvent: async (payload) => {
     set({ isLoading: true })
 
+    await new Promise((resolve) => setTimeout(resolve, 1000)) // simulate loading
     const response = await api.put<IEvent>(`events/${payload.id}`, payload)
     const event = response.data
 
@@ -83,8 +86,18 @@ export const useEventsStore = create<EventsState>((set, get) => ({
       events: state.events.map((e) => (e.id === event.id ? event : e)),
     }))
   },
-  deleteEvent: (id) => {
+  deleteEvent: async (id) => {
+    set({ isLoading: true })
+
+    await new Promise((resolve) => setTimeout(resolve, 1000)) // simulate loading
+    const response = await api.delete(`events/${id}`)
+
+    if (response.status !== 200) {
+      throw new Error('Failed to delete event')
+    }
+
     set((state) => ({
+      isLoading: false,
       events: state.events.filter((e) => e.id !== id),
     }))
   },
