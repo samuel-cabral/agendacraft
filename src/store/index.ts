@@ -3,7 +3,7 @@ import { create } from 'zustand'
 import { api } from '@/lib/axios'
 
 export interface IEvent {
-  id: number
+  id: string
   name: string
   date: string
   description: string
@@ -12,25 +12,24 @@ export interface IEvent {
 
 type EventsState = {
   events: IEvent[]
-  loading: boolean
+  isLoading: boolean
   error: string | null
-  fetchEvents: () => void
-  addEvent: (event: IEvent) => void
-  editEvent: (event: IEvent) => void
-  deleteEvent: (id: number) => void
+  fetchEvents: () => Promise<void>
+  getEvent: (id: string) => IEvent | undefined
+  addEvent: (payload: Omit<IEvent, 'id'>) => Promise<void>
+  editEvent: (payload: IEvent) => Promise<void>
+  deleteEvent: (id: string) => void
 }
 
-export const useEventsStore = create<EventsState>((set) => ({
+export const useEventsStore = create<EventsState>((set, get) => ({
   events: [],
-  loading: false,
+  isLoading: false,
   error: null,
   fetchEvents: async () => {
-    set({ loading: true })
+    set({ isLoading: true })
 
     try {
       const response = await api.get('events')
-
-      console.log(response.data)
 
       if (!response.data) {
         throw new Error('Failed to fetch events')
@@ -38,18 +37,49 @@ export const useEventsStore = create<EventsState>((set) => ({
 
       const events = await response.data
 
-      set({ events, loading: false })
+      set({ events, isLoading: false })
     } catch (error) {
       console.error('error on fetch events', error)
-      if (error instanceof Error) set({ error: error.message, loading: false })
-      else set({ error: 'An error occurred', loading: false })
+      if (error instanceof Error)
+        set({ error: error.message, isLoading: false })
+      else set({ error: 'An error occurred', isLoading: false })
     }
   },
-  addEvent: (event) => {
-    set((state) => ({ events: [...state.events, event] }))
+  getEvent: (id) => {
+    const event = get().events.find((event) => event.id === id)
+
+    if (!event) {
+      console.error('Event not found')
+    }
+
+    return event
   },
-  editEvent: (event) => {
+
+  addEvent: async (payload) => {
+    set({ isLoading: true })
+
+    const response = await api.post<IEvent>('events', payload)
+
+    if (!response.data) {
+      throw new Error('Failed to add event')
+    }
+
+    const event = response.data
+
+    set((state) => ({ isLoading: false, events: [...state.events, event] }))
+  },
+  editEvent: async (payload) => {
+    set({ isLoading: true })
+
+    const response = await api.put<IEvent>(`events/${payload.id}`, payload)
+    const event = response.data
+
+    if (!response.data) {
+      throw new Error('Failed to update event')
+    }
+
     set((state) => ({
+      isLoading: false,
       events: state.events.map((e) => (e.id === event.id ? event : e)),
     }))
   },

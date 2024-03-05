@@ -1,24 +1,22 @@
 'use client'
 
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 
 import { useEventsStore } from '@/store'
 
 import { EventCard } from './EventCard'
 
 export function EventsList() {
-  const { events, fetchEvents, loading } = useEventsStore()
+  const { events, fetchEvents, isLoading } = useEventsStore()
 
   useEffect(() => {
     fetchEvents()
   }, [fetchEvents])
 
-  console.log('🚀 ~ EventsList ~ events:', events)
   return (
-    <>
-      {loading && <p>Loading...</p>}
+    <Suspense fallback={<div>Loading events...</div>}>
       {events &&
         events.map((event) => <EventCard key={event.id} event={event} />)}
-    </>
+    </Suspense>
   )
 }
