@@ -3,7 +3,7 @@ import { create } from 'zustand'
 import { api } from '@/lib/axios'
 
 export interface IEvent {
-  id: number
+  id: string
   name: string
   date: string
   description: string
@@ -15,10 +15,10 @@ type EventsState = {
   isLoading: boolean
   error: string | null
   fetchEvents: () => Promise<void>
-  getEvent: (id: number) => IEvent | undefined
-  addEvent: (event: IEvent) => void
+  getEvent: (id: string) => IEvent | undefined
+  addEvent: (payload: Omit<IEvent, 'id'>) => Promise<void>
   editEvent: (event: IEvent) => void
-  deleteEvent: (id: number) => void
+  deleteEvent: (id: string) => void
 }
 
 export const useEventsStore = create<EventsState>((set, get) => ({
@@ -48,7 +48,16 @@ export const useEventsStore = create<EventsState>((set, get) => ({
   getEvent: (id) => {
     return get().events.find((event) => event.id === id)
   },
-  addEvent: (event) => {
+
+  addEvent: async (payload) => {
+    const response = await api.post<IEvent>('events', payload)
+
+    if (!response.data) {
+      throw new Error('Failed to add event')
+    }
+
+    const event = response.data
+
     set((state) => ({ events: [...state.events, event] }))
   },
   editEvent: (event) => {

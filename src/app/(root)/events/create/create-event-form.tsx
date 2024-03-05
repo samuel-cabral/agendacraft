@@ -27,17 +27,16 @@ export function CreateEventForm() {
   const { handleSubmit } = createEventForm
 
   async function handleCreateEvent(data: EventFormData) {
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-
     const { eventName, date, description } = data
 
-    addEvent({
-      id: Date.now(),
+    const payload = {
       name: eventName,
       date: date.toISOString(),
       description,
       image: 'https://source.unsplash.com/random/800x600',
-    })
+    }
+
+    await addEvent(payload)
 
     toast.success('Event has been created', {
       description: format(date, 'MMMM dd, yyyy'),
