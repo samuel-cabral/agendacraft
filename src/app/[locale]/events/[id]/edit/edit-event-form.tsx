@@ -2,6 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format, startOfDay } from 'date-fns'
+import { Loader } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
@@ -18,6 +20,8 @@ interface EditEventFormProps {
 }
 
 export function EditEventForm({ event }: EditEventFormProps) {
+  const t = useTranslations('CreateEvent')
+
   const { updateEvent, isLoading } = useEventsStore()
 
   const editEventForm = useForm<EventFormData>({
@@ -48,8 +52,7 @@ export function EditEventForm({ event }: EditEventFormProps) {
 
     await updateEvent(payload)
 
-    toast.success('Event has been updated', {
-      description: format(date, 'MMMM dd, yyyy'),
+    toast.success(t('updatedSuccess'), {
       closeButton: true,
     })
   }
@@ -64,7 +67,7 @@ export function EditEventForm({ event }: EditEventFormProps) {
       </FormProvider>
 
       <Button type="submit" disabled={isLoading}>
-        {isLoading ? 'Updating...' : 'Update Event'}
+        {isLoading ? <Loader size={14} className="animate-spin" /> : t('save')}
       </Button>
     </form>
   )

@@ -1,6 +1,7 @@
 'use client'
 
 import { startOfDecade } from 'date-fns'
+import { useTranslations } from 'next-intl'
 import { useFormContext } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -22,6 +23,7 @@ export const eventFormSchema = z.object({
 export type EventFormData = z.infer<typeof eventFormSchema>
 
 export function EventForm() {
+  const t = useTranslations('CreateEvent')
   const eventForm = useFormContext<EventFormData>()
 
   const {
@@ -33,12 +35,12 @@ export function EventForm() {
     <>
       <div className="flex flex-1 flex-col gap-4">
         <FormLabel className="text-xs md:text-sm" htmlFor="eventName">
-          Event Name
+          {t('name')}
         </FormLabel>
         <Input
           id="eventName"
           {...register('eventName')}
-          placeholder="Your event name"
+          placeholder={t('namePlaceholder')}
           className={cn(
             { 'border-red-500': errors.eventName },
             'border-collapse border',
@@ -54,8 +56,8 @@ export function EventForm() {
       <div>
         <DatePicker
           name="date"
-          label="Event date"
-          placeholder="Select a date"
+          label={t('date')}
+          placeholder={t('datePlaceholder')}
           error={errors.date}
           className={cn(
             { 'border-red-500': errors.date },
@@ -66,11 +68,11 @@ export function EventForm() {
 
       <div className="mt-4 flex-1 space-y-2">
         <FormLabel className="text-xs md:text-sm" htmlFor="description">
-          Description
+          {t('description')}
         </FormLabel>
         <Textarea
           id="description"
-          placeholder="Tell us about your event..."
+          placeholder={t('descriptionPlaceholder')}
           {...register('description', { required: true })}
           className={errors.description ? 'border-red-500' : ''}
         />

@@ -1,0 +1,66 @@
+{
+  "Index": {
+    "title": "Gerencie seus eventos com facilidade",
+    "subtitle": "Crie, edite e exclua eventos com poucos cliques. É muito fácil!",
+    "explore": "Explore Agora",
+    "edit": "Editar",
+    "search": "Buscar",
+    "yourEvents": "Seus eventos",
+    "eventDate": "{date, date, long}"
+  },
+  "Navigation": {
+    "home": "Início",
+    "events": "Eventos",
+    "about": "Sobre",
+    "login": "Entrar",
+    "logout": "Sair",
+    "profile": "Perfil",
+    "dashboard": "Painel",
+    "admin": "Admin",
+    "search": "Buscar",
+    "createEvent": "Criar Evento"
+  },
+  "CreateEvent": {
+    "title": "Criar Evento",
+    "name": "Nome",
+    "namePlaceholder": "Digite o nome do evento...",
+    "description": "Descrição",
+    "descriptionPlaceholder": "Descreva seu evento...",
+    "date": "Data",
+    "datePlaceholder": "Selecione a data do evento",
+    "time": "Hora",
+    "location": "Localização",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "saveChanges": "Salvar Alterações",
+    "createdSuccess": "Evento criado com sucesso!",
+    "updatedSuccess": "Evento atualizado com sucesso!"
+  },
+  "EventCard": {
+    "eventDate": "{date, date, long}",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "viewDetails": "Ver Detalhes"
+  },
+  "EventDeletionDialog": {
+    "title": "Excluir Evento",
+    "message": "Tem certeza que deseja excluir o evento \"{eventName}\"?",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "deletionSuccess": "Evento excluído com sucesso!",
+    "deletionError": "Erro ao excluir evento. Por favor, tente novamente."
+  },
+  "LocaleSwitcher": {
+    "label": "Mudar Idioma",
+    "locale": "{locale, select, pt {🇧🇷 Português} en {🇺🇸 English} other {Unknown}}"
+  },
+  "ThemeSwitcher": {
+    "label": "Mudar Tema",
+    "theme": "{theme, select, light {🌞 Claro} dark {🌚 Escuro}}"
+  },
+  "Footer": {
+    "author": "Feito com ❤️ por {author}.",
+    "sourceCode": "Código Fonte no {github}"
+  }
+}

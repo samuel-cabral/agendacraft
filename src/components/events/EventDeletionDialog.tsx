@@ -1,4 +1,7 @@
-import { Trash2 } from 'lucide-react'
+'use client'
+
+import { Loader, Trash2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
@@ -19,12 +22,13 @@ interface EventDeletionDialogProps {
 }
 
 export function EventDeletionDialog({ event }: EventDeletionDialogProps) {
+  const t = useTranslations('EventDeletionDialog')
   const { deleteEvent, isLoading } = useEventsStore()
 
   async function handleDeleteEvent() {
     await deleteEvent(event.id)
 
-    toast.success(`Event "${event.name}" has been deleted!`)
+    toast.success(t('deletionSuccess', { eventName: event.name }))
   }
 
   return (
@@ -35,31 +39,36 @@ export function EventDeletionDialog({ event }: EventDeletionDialogProps) {
           className="gap-2"
           aria-label="Delete event"
         >
-          <span className="hidden md:inline-block">Delete</span>
+          <span className="hidden md:inline-block">{t('delete')}</span>
           <Trash2 size={14} />
         </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Delete Event</DialogTitle>
+          <DialogTitle>{t('title')}</DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete the event &quot;{event.name}&quot;?
+            {t('message', { eventName: event.name })}
           </DialogDescription>
         </DialogHeader>
 
         <DialogFooter className="gap-2">
           <DialogClose asChild>
             <Button type="button" variant="secondary">
-              Cancel
+              {t('cancel')}
             </Button>
           </DialogClose>
           <Button
             variant="destructive"
             onClick={handleDeleteEvent}
             disabled={isLoading}
+            className="w-full  sm:w-20"
           >
-            {isLoading ? 'Deleting...' : 'Delete'}
+            {isLoading ? (
+              <Loader size={14} className="animate-spin" />
+            ) : (
+              t('delete')
+            )}
           </Button>
         </DialogFooter>
       </DialogContent>

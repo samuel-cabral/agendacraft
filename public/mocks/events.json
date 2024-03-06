@@ -18,14 +18,14 @@
       "id": "3",
       "name": "Dinner with friends",
       "date": "2024-03-07T03:00:00.000Z",
-      "description": "Dinner with friends at the new restaurant in town",
+      "description": "Dinner with friends at the new restaurant in town. Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "image": "/assets/images/dinner.jpg"
     },
     {
       "id": "4",
       "name": "International Women's Day",
       "date": "2024-03-08T03:00:00.000Z",
-      "description": "International Women's Day is a global holiday celebrated annually on March 8 as a focal point in the women's rights movement. IWD gives focus to issues such as gender equality, reproductive rights, and violence and abuse against women.\n\nReference: https://en.wikipedia.org/wiki/International_Women's_Day",
+      "description": "International Women's Day is a global holiday celebrated annually on March 8.",
       "image": "/assets/images/beach.jpg"
     }
   ]

@@ -1,7 +1,8 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { format } from 'date-fns'
+import { Loader } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
@@ -14,6 +15,7 @@ import { Button } from '@/components/ui/button'
 import { useEventsStore } from '@/store'
 
 export function CreateEventForm() {
+  const t = useTranslations('CreateEvent')
   const { isLoading, addEvent } = useEventsStore()
 
   const createEventForm = useForm<EventFormData>({
@@ -38,8 +40,7 @@ export function CreateEventForm() {
 
     await addEvent(payload)
 
-    toast.success('Event has been created', {
-      description: format(date, 'MMMM dd, yyyy'),
+    toast.success(t('createdSuccess'), {
       closeButton: true,
     })
   }
@@ -52,8 +53,9 @@ export function CreateEventForm() {
       <FormProvider {...createEventForm}>
         <EventForm />
       </FormProvider>
+
       <Button type="submit" disabled={isLoading}>
-        {isLoading ? 'Creating...' : 'Create event'}
+        {isLoading ? <Loader size={14} className="animate-spin" /> : t('save')}
       </Button>
     </form>
   )

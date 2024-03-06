@@ -1,0 +1,67 @@
+{
+  "Index": {
+    "title": "Manage your events with ease",
+    "subtitle": "Create, edit, and delete events with a few clicks. It's that easy!",
+    "explore": "Explore Now",
+    "createEvent": "Create Event",
+    "edit": "Edit",
+    "home": "Home",
+    "search": "Search",
+    "yourEvents": "Your events",
+    "noEvents": "You have no events yet. Create one now!",
+    "eventDate": "{date, date, long}"
+  },
+  "Navigation": {
+    "home": "Home",
+    "createEvent": "Create Event",
+    "search": "Search",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile"
+  },
+  "CreateEvent": {
+    "title": "Create Event",
+    "name": "Name",
+    "namePlaceholder": "Enter the name of your event...",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter a description for your event...",
+    "date": "Date",
+    "datePlaceholder": "Select the date of your event...",
+    "time": "Time",
+    "location": "Location",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saveChanges": "Save Changes",
+    "createdSuccess": "Event created successfully!",
+    "updatedSuccess": "Event updated successfully!",
+    "createdError": "An error occurred while creating the event. Please try again.",
+    "updatedError": "An error occurred while updating the event. Please try again."
+  },
+  "EventCard": {
+    "eventDate": "{date, date, long}",
+    "edit": "Edit",
+    "delete": "Delete",
+    "viewDetails": "View Details"
+  },
+  "EventDeletionDialog": {
+    "title": "Delete Event",
+    "message": "Are you sure you want to delete the event \"{eventName}\" ?",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "deletionSuccess": "Event {eventName} deleted successfully!",
+    "deletionError": "An error occurred while deleting the event. Please try again."
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, pt {🇧🇷 Português} en {🇺🇸 English} other {Unknown}}"
+  },
+  "ThemeSwitcher": {
+    "label": "Change theme",
+    "theme": "{theme, select, light {🌞 Light} dark {🌚 Dark} other {Unknown}}"
+  },
+  "Footer": {
+    "author": "Made with ❤️ by {author}.",
+    "sourceCode": "Source code on {github}"
+  }
+}
