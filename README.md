@@ -82,6 +82,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name - [samuelcabral.mail@gmail.com](mailto:samuelcabral.mail@gmail.com)
+Samuel Cabral - [samuelcabral.mail@gmail.com](mailto:samuelcabral.mail@gmail.com)
 
 Project Link: [https://github.com/samuel-cabral/agendacraft](https://github.com/samuel-cabral/agendacraft)
