@@ -28,11 +28,7 @@ This Event Management App is a full-featured application built using Next.js, de
 
 ### Installation
 
-1. Clone the repository:
-
-   ```
-   git clone <repository-url>
-   ```
+1. Clone the repository
 
 2. Navigate to the app's directory:
 
